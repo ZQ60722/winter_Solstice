@@ -1,0 +1,374 @@
+
+/* 1. 父容器：负责让播放器和歌词并排 */
+.music-player-section {
+    margin-top: 8px;
+    display: flex; /* 关键：开启Flex布局，让子元素水平排列 */
+    justify-content: center; /* 在主轴上居中对齐 */
+    align-items: flex-start; /* 在交叉轴上从顶部对齐，因为歌词会滚动 */
+    padding: 30px 16px;
+    gap: 20px; /* 播放器和歌词之间的间距 */
+    background-color: #f0f2f5; /* 主页面背景色 */
+}
+
+/* 2. 左侧播放器容器 */
+.player-container {
+    /* 可以给播放器加个半透明背景，让它更突出 */
+    background: rgba(40, 40, 40, 0.8);
+    padding: 30px 16px;
+    border-radius: 20px;
+    box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+}
+
+/* 3. 播放器本身 (内部结构：唱片和控制区) */
+.music-player {
+    display: flex; /* 让唱片和控制区水平排列 */
+    align-items: center;
+    color: #fff; /* 播放器内部文字颜色 */
+}
+
+/* 唱片容器 */
+.album-art {
+    margin-right: 30px;
+}
+
+.record {
+    width: 250px;
+    height: 250px;
+    border-radius: 50%;
+    background: linear-gradient(45deg, #333, #111);
+    position: relative;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.7);
+    animation: spin 20s linear infinite;
+    animation-play-state: paused;
+}
+.record.playing {
+    animation: rotate 24s linear infinite;
+}
+@keyframes rotate {
+    from {
+        transform: rotate(0deg); /* 动画开始时，旋转角度为 0 度 */
+    }
+    to {
+        transform: rotate(360deg); /* 动画结束时，旋转角度为 360 度（即转一圈） */
+    }
+}
+
+.album-cover {
+    width: 75%;
+    height: 75%;
+    border-radius: 50%;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    object-fit: cover;
+}
+
+.record-center {
+    width: 30%;
+    height: 30%;
+    background-color: #c0392b;
+    border-radius: 50%;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
+}
+
+@keyframes spin {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+}
+
+
+/* 控制面板样式 */
+.player-controls {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.song-title {
+    font-size: 1.5em;
+    margin: 0;
+}
+
+.artist-name {
+    font-size: 1em;
+    color: #b3b3b3;
+    margin-top: 5px;
+}
+.time-stamps {
+    display: flex;          /* 启用 Flexbox 布局 */
+    justify-content: space-between; /* 这是关键！让子元素两端对齐，中间自动分配空间 */
+    width: 100%;            /* 确保容器占满整个进度条的宽度 */
+    font-size: 0.9em;       /* 可以稍微调小字体，更美观 */
+    color: #666;            /* 设置一个柔和的颜色 */
+}
+
+.progress-container {
+    width: 300px;
+    height: 5px;
+    background-color: #555;
+    border-radius: 5px;
+    margin: 20px 0;
+    cursor: pointer;
+}
+
+.progress-bar {
+    width: 0;
+    height: 100%;
+    background-color: #1db954;
+    border-radius: 5px;
+    transition: width 0.1s linear;
+}
+.time-stamps span{
+    gap:30px;
+}
+.controls {
+    display: flex;
+    gap: 15px;
+}
+
+.controls button {
+    background: none;
+    border: none;
+    color: #fff;
+    font-size: 1.5em;
+    cursor: pointer;
+    transition: transform 0.2s;
+}
+
+.controls button:hover {
+    transform: scale(1.1);
+}
+
+.volume-control {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-top: 15px;
+}
+
+#volume-slider {
+    width: 100px;
+}
+
+
+/* ======================================================= */
+/*                     右侧歌词区域                        */
+/* ======================================================= */
+
+.lyrics-container {
+    width: 460px;
+    height: 280px; /* 固定高度，创建滚动区域 */
+    overflow-y: auto; /* 关键：允许垂直滚动 */
+    padding: 12px;
+    text-align: center;
+    color: #333; /* 歌词默认颜色 */
+    /* 美化滚动条 */
+    scrollbar-width: thin;
+    scrollbar-color: #8c8e8c #f1f1f1;
+}
+.lyrics-container::-webkit-scrollbar {
+    width: 8px;
+}
+.lyrics-container::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    border-radius: 10px;
+}
+.lyrics-container::-webkit-scrollbar-thumb {
+    background-color: #1db954;
+    border-radius: 10px;
+}
+
+.lyric-line {
+    font-family: 'Ma Shan Zheng', cursive; /* 手写字体 */
+    font-size: 1.6em;
+    line-height: 2;
+    opacity: 0.6;
+    margin: 10px 0;
+    transition: all 0.5s ease;
+    cursor: pointer;
+    word-wrap: break-word;
+    word-break: break-all;
+}
+
+.lyric-line.active {
+    font-size: 1.7em;
+    color: #000;
+    transform: scale(1.05);
+    opacity: 1;
+    font-weight: bold;
+    text-shadow: 1px 1px 2px rgba(0,0,0,0.2);
+}
+#effects-stage {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none; /* 关键！让鼠标事件穿透，不影响播放器操作 */
+    z-index: 100; /* 层级设高，确保覆盖在播放器所有元素之上 */
+}
+
+/* 花朵绽放效果 */
+.flower {
+    position: absolute;
+    color: white;
+    text-shadow: 0 0 10px rgba(255, 255, 255, 0.8);
+    animation: bloom ease-out forwards;
+    will-change: transform, opacity;
+}
+
+@keyframes bloom {
+    0% {
+        transform: translate(0, 0) scale(0) rotate(0deg);
+        opacity: 0;
+    }
+    15% {
+        opacity: 1;
+    }
+    50% {
+        transform: translate(calc(var(--end-x) * 0.5), calc(var(--end-y) * 0.5)) scale(1.2) rotate(90deg);
+        opacity: 1;
+    }
+    100% {
+        transform: translate(var(--end-x), var(--end-y)) scale(var(--scale)) rotate(180deg);
+        opacity: 0;
+    }
+}
+/* ==================== 正确的卡片样式（只保留这一套） ==================== */
+
+/* 带文字的祝福弹窗 */
+.blessing-popup {
+    position: fixed;
+    background: rgba(255, 255, 255, 0.9);
+    backdrop-filter: blur(10px);
+    border-radius: 20px;
+    padding: 25px;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+    z-index: 1000; /* 给一个足够高的层级 */
+    min-width: 280px;
+    max-width: 350px;
+    cursor: move;
+    /* 动画将在下面定义 */
+    transition: all 0.3s ease;
+}
+
+.blessing-popup:hover {
+    transform: scale(1.02);
+    box-shadow: 0 25px 70px rgba(0,0,0,0.4);
+    z-index: 1001;
+}
+
+.blessing-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+    padding-bottom: 10px;
+    border-bottom: 2px solid #f0f0f0;
+}
+
+.blessing-title {
+    font-size: 1.2rem;
+    font-weight: bold;
+    background: linear-gradient(45deg, #ff6b6b, #4ecdc4);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.close-btn {
+    background: #ff6b6b;
+    color: white;
+    border: none;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    cursor: pointer;
+    font-size: 1.2rem;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.close-btn:hover {
+    background: #ee5a24;
+    transform: rotate(90deg);
+}
+
+.blessing-content {
+    font-size: 1rem;
+    line-height: 1.6;
+    color: #333;
+    margin-bottom: 15px;
+}
+
+.blessing-image {
+    width: 100%;
+    height: 150px;
+    object-fit: cover;
+    border-radius: 10px;
+    margin-bottom: 10px;
+}
+
+.blessing-footer {
+    text-align: right;
+    font-size: 0.9rem;
+    color: #888;
+    font-style: italic;
+}
+
+/* 纯图片弹窗 */
+.image-popup {
+    position: fixed;
+    background: rgba(255, 255, 255, 0.9);
+    backdrop-filter: blur(10px);
+    border-radius: 15px;
+    padding: 10px;
+    box-shadow: 0 15px 40px rgba(0,0,0,0.25);
+    z-index: 999; /* 层级比文字卡片稍低 */
+    cursor: move;
+    /* 动画将在下面定义 */
+    transition: all 0.3s ease;
+}
+
+.image-popup:hover {
+    transform: scale(1.05);
+    box-shadow: 0 20px 50px rgba(0,0,0,0.35);
+    z-index: 1000;
+}
+
+.image-popup img {
+    width: 200px;
+    height: 200px;
+    object-fit: cover;
+    border-radius: 10px;
+    display: block;
+}
+
+.image-popup .close-btn {
+    position: absolute;
+    top: -10px;
+    right: -10px;
+    width: 25px;
+    height: 25px;
+    font-size: 1rem;
+}
+
+/* ==================== 必须的动画定义 ==================== */
+
+@keyframes bambooShoot {
+    from {
+        opacity: 0;
+        transform: scale(0.3) translateY(50px);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1) translateY(0);
+    }
+}
