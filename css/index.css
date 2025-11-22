@@ -316,7 +316,7 @@ section{
 }
 .image-cell {
     flex: 1;
-    height: 480px; /* 根据你的图片比例调整 */
+    height: 640px; /* 根据你的图片比例调整 */
     background-size: 600% 100%; /* 6张图，所以是600% */
     background-repeat: no-repeat;
     background-position: 0% 50%; /* 默认显示第一张 */

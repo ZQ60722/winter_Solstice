@@ -7,25 +7,25 @@ const blessings = [
     {
         title: "最美的不是下雨天，是曾与你躲过雨的屋檐",
         image: "img+audio/下雨天.jpg",
-        content: "那天晚上你问我是什么，我没撒谎，确实是不能说的秘密",
+        content: "那天晚上我问你物理题要怎么写，你摇头，原来不是不肯教我，而是——",
         from: "不能说的秘密"
     },
     {
         title: "潺潺流水穿过了群山一座座",
         image: "img+audio/桥.jpg",
-        content: "王菲说平方最浪漫，便读懂细水潺潺的温柔",
+        content: "王菲说平凡最浪漫，于是我开始读懂细水潺潺的温柔",
         from: "珠江新城"
     },
     {
         title: "昆明的春+你喜欢的花",
         image: "img+audio/云南4.jpg",
-        content: "至若春和景明",
+        content: "至若春和景明，失约的花定会再见",
         from: "来自云南朋友的祝福"
     },
     {
-        title:"汉语言的浪漫",
-        image:"img+audio/汉语言.jpg",
-        content:"于是我开始看边城，自此代码里多了细腻和温情",
+        title:"凤起楼的木棉花",
+        image:"img+audio/木棉花.jpg",
+        content:"于是我开始回忆，自此代码里多了细腻和温情",
         from:"沈从文"
     },
     {
@@ -35,9 +35,9 @@ const blessings = [
         from:"鱼玄机"
     },
     {
-        title:"中路一塔",
+        title:"夜空霓虹",
         image:"img+audio/夜空霓虹1.jpg",
-        content:"打野蹭线圣地，法师独有温情",
+        content:"这是不是你那个时候跟我说的夜空霓虹",
         from:"广州塔"
     },
     {
@@ -79,7 +79,7 @@ const imageOnlyBlessings = [
     "img+audio/云南5.jpg",
     "img+audio/云南3.jpg",
     "img+audio/云南.jpg",
-    "img+audio/楼.jpg",
+    "img+audio/晴天(2).jpg",
     "img+audio/山.jpg",
     "img+audio/鸟.jpg",
     "img+audio/桥(2).jpg"
