@@ -30,7 +30,7 @@ const blessings = [
     },
     {
         title:"七里香",
-        image:"img+audio/七里香.jpg",
+        image:"img+audio/poem.jpg",
         content:"其实我很好奇，秋刀鱼到底是什么滋味",
         from:"鱼玄机"
     },
